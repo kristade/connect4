@@ -81,7 +81,7 @@ void printBoard(int row, int col, char grid[row][col]){
     else
       printf("%d ", a);
   }
-  printf("\n");
+  printf("\n\n");
 }
 
 void computerMove(struct Graph* graph) { // Artificial intelligence for the Player vs. Computer mode. Computer is always playing to win.
@@ -127,6 +127,35 @@ bool playerOne_winState(int row, int col, char grid[row][col]){
     return false;
 }
 
+bool playerTwo_winState(int row, int col, char grid[row][col]){
+    for(int a = row; a >= 0; a--){
+      for(int b = col; b >= 0; b--){
+        if(grid[a][b] == 'O'){
+          int horizontal = 0;
+          int vertical = 0;
+          int diagLeft = 0;
+          int diagRight = 0;
+          for(int c = 0; c < row; c++){
+            if(grid[a-c][b] == 'O'){horizontal++;}
+          }
+          for(int c = 0; c < col; c++){
+            if(grid[a][b-c] == 'O'){vertical++;}
+          }
+          for(int c = 0; c < col; c++){
+            if(grid[a-c][b+c] == 'O'){diagLeft++;}
+          }
+          for(int c = 0; c < col; c++){
+            if(grid[a-c][b-c] == 'O'){diagRight++;}
+          }
+          if(horizontal == 4 || vertical == 4 || diagLeft == 4 || diagRight == 4){
+            return true;
+          }
+        }
+      }
+    }
+    return false;
+}
+
 int main() {
     printf("** Welcome to Connect4 **\n"); // Introduction
     printf("I do not own the copyrights to this game.\n\n"); // Legal rights
@@ -147,8 +176,8 @@ int main() {
       scanf(" %c", &player);
     }
 
-    if(player == 'p' || player == 'P'){printf("\nYou have chosen Player vs. Player.\n");}
-    else{printf("\nYou have chosen Player vs. Computer.\n");}
+    if(player == 'p' || player == 'P'){printf("\nYou have chosen Player vs. Player.\n\n");}
+    else{printf("\nYou have chosen Player vs. Computer.\n\n");}
 
     printf("Now let's choose your board size.\n"); // Prompt player for board size.
     printf("**Warning any board over a 40 x 40, runs off the screen and becomes hard to play.**\n");
@@ -184,24 +213,49 @@ int main() {
 
     while(playAgain){
       int box = 0;
+      int compacity[col];
+      for(int a = 0; a < col; a++){
+        compacity[a] = row;
+      }
       char grid[row][col];
       int gridkey[row][col];
       makeBoard(row, col, box, grid, gridkey);
       box = row * col;
       struct Graph* graph = createGraph(box);
       makeConnection(graph, row, col, gridkey);
-      printBoard(row, col, grid);
-      printf("\n");
+      //printBoard(row, col, grid);
 
-    /*  if(player == 'p' || player == 'P'){
-        bool winner = false;
-        while(winner){
-          bool player1 = true;
+      if(player == 'p' || player == 'P'){
+        bool pvp = true;
+        bool turn = true;
+        while(pvp){
+          if(turn){
+            printBoard(row, col, grid);
+            printf("It is player one turn.\n");
+            printf("Choose a column to place your 'X': ");
+            char numMove[100];
+            scanf("%s", numMove);
+            int move = atoi(numMove);
+            while(move == 0 || move > col){
+              if(compacity[move] == -1){
+                printf("\nSorry, that column is full.\n");
+                printf("Please choose another column: ");
+                scanf("%s", numMove);
+                move = atoi(numMove);
+              }
+              else{
+                printf("\nSorry that is not an option.\n");
+                printf("Choose a column to place your 'X': ");
+                scanf("%s", numMove);
+                move = atoi(numMove);
+              }
+            }
+          }
         }
       }
       else{
         computerMove(graph);
-      }*/
+      }
       printf("Would you like to play again? (Y)es or (N)o: ");
       char nextMatch;
       scanf(" %c", &nextMatch);

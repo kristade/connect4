@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include <math.h>
 #include <ctype.h>
+#include <stdbool.h>
+
 
 struct square { // Square and/or node is the representation of where a location on the board is.
     int location; // Location of that square.
@@ -96,16 +98,41 @@ void computerMove(struct Graph* graph) { // Artificial intelligence for the Play
     }
 }
 
-bool playerOne_winState(){}
-bool playerTwo_winStae(){}
-bool computer_winState(){}
+bool playerOne_winState(int row, int col, char grid[row][col]){
+    for(int a = row; a >= 0; a--){
+      for(int b = col; b >= 0; b--){
+        if(grid[a][b] == 'X'){
+          int horizontal = 0;
+          int vertical = 0;
+          int diagLeft = 0;
+          int diagRight = 0;
+          for(int c = 0; c < row; c++){
+            if(grid[a-c][b] == 'X'){horizontal++;}
+          }
+          for(int c = 0; c < col; c++){
+            if(grid[a][b-c] == 'X'){vertical++;}
+          }
+          for(int c = 0; c < col; c++){
+            if(grid[a-c][b+c] == 'X'){diagLeft++;}
+          }
+          for(int c = 0; c < col; c++){
+            if(grid[a-c][b-c] == 'X'){diagRight++;}
+          }
+          if(horizontal == 4 || vertical == 4 || diagLeft == 4 || diagRight == 4){
+            return true;
+          }
+        }
+      }
+    }
+    return false;
+}
 
 int main() {
     printf("** Welcome to Connect4 **\n"); // Introduction
     printf("I do not own the copyrights to this game.\n\n"); // Legal rights
 
-    printf("The object of this game is to connect 4 of your 'X's and/or 'O's so that they form a line in horizontal, vertical or diagonal direction\n")
-    printf("while ascending from the bottom of the board. First player to do so is the winner.\n\n")
+    printf("The object of this game is to connect 4 of your 'X's and/or 'O's so that they form a line in horizontal, vertical or diagonal direction\n");
+    printf("while ascending from the bottom of the board. First player to do so is the winner.\n\n");
 
     printf("Let's choose your Player mode.\n"); // Prompt player for Player mode
     printf("For Player vs. Player - Enter 'P'\n");
@@ -153,7 +180,7 @@ int main() {
     }
 
     bool playAgain = true; // Determines the amount of rounds the player plays
-    int matches = {0, 0}; // Keeps track of how many wins each player has
+    int matches[2] = {0}; // Keeps track of how many wins each player has
 
     while(playAgain){
       int box = 0;
@@ -163,8 +190,10 @@ int main() {
       box = row * col;
       struct Graph* graph = createGraph(box);
       makeConnection(graph, row, col, gridkey);
+      printBoard(row, col, grid);
+      printf("\n");
 
-      if(player == 'p' || player == 'P'){
+    /*  if(player == 'p' || player == 'P'){
         bool winner = false;
         while(winner){
           bool player1 = true;
@@ -172,7 +201,24 @@ int main() {
       }
       else{
         computerMove(graph);
+      }*/
+      printf("Would you like to play again? (Y)es or (N)o: ");
+      char nextMatch;
+      scanf(" %c", &nextMatch);
+
+      while(nextMatch != 'y' && nextMatch != 'Y' && nextMatch != 'n' && nextMatch != 'N'){ //Loops until player enter the correct key.
+        printf("\nSorry that is not an option.\n");
+        printf("Would you like to play again? (Y)es or (N)o: ");
+        scanf(" %c", &nextMatch);
       }
+      if(nextMatch == 'N' || nextMatch == 'n' ){
+        playAgain = false;
+      }
+    }
+    if(playAgain == false){
+      printf("\nThanks for playing Connect4.\n");
+      printf("Come again soon.\n");
+    }
 
 
     return 0;

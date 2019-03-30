@@ -129,7 +129,7 @@ void computerMove(struct Graph* graph, bool firstMove, int row, int col, int com
                         return;
                       }
                     }
-                    artInt = artInt->next;
+                    else{artInt = artInt->next;}
                   }
                 }
               }
@@ -179,16 +179,16 @@ bool playerTwo_winState(int row, int col, char grid[row][col]){
           int vertical = 0;
           int diagLeft = 0;
           int diagRight = 0;
-          for(int c = 0; c < row; c++){
+          for(int c = 1; c < row; c++){
             if(grid[a-c][b] == 'O'){horizontal++;}
           }
-          for(int c = 0; c < col; c++){
+          for(int c = 1; c < col; c++){
             if(grid[a][b-c] == 'O'){vertical++;}
           }
-          for(int c = 0; c < col; c++){
+          for(int c = 1; c < col; c++){
             if(grid[a-c][b+c] == 'O'){diagLeft++;}
           }
-          for(int c = 0; c < col; c++){
+          for(int c = 1; c < col; c++){
             if(grid[a-c][b-c] == 'O'){diagRight++;}
           }
           if(horizontal == 4 || vertical == 4 || diagLeft == 4 || diagRight == 4){
@@ -198,6 +198,15 @@ bool playerTwo_winState(int row, int col, char grid[row][col]){
       }
     }
     return false;
+}
+
+bool gridFull(int col, int compacity[col]){
+  for(int a = 0; a < col; a++){
+    if(compacity[a] != 0){
+      return false;
+    }
+  }
+  return true;
 }
 
 int main() {
@@ -276,6 +285,14 @@ int main() {
         bool pvp = true;
         bool turn = true;
         while(pvp){
+          if(gridFull(col, compacity)){
+            printf("\n");
+            printBoard(row, col, grid);
+            printf("It is a DRAW!!\n");
+            printf("The board is full. No more moves can be played.\n\n");
+            pvp = false;
+          }
+          if(pvp){
           if(turn){
             printf("\n");
             printBoard(row, col, grid);
@@ -351,12 +368,12 @@ int main() {
           }
         }
       }
+      }
       else{
         int compacity[col];
 
         for(int a = 0; a < col; a++){
           compacity[a] = row;
-          //printf("Index: %d\tAmount: %d\n", a, compacity[a]);
         }
 
         bool pvc = true;
@@ -377,6 +394,7 @@ int main() {
                 scanf("%s", numMove);
                 move = atoi(numMove);
             }
+
             while(move > 0 && move <= col){
               if(compacity[move-1] == 0){
                 printf("\nSorry, that column is full.\n");

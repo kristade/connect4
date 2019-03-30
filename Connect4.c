@@ -211,7 +211,7 @@ bool playerOne_winState(int row, int col, char grid[row][col]){
 bool playerTwo_winState(int row, int col, char grid[row][col]){
     for(int a = row; a >= 0; a--){
       for(int b = col; b >= 0; b--){
-        if(grid[a][b] == 'X'){
+        if(grid[a][b] == 'O'){
           int horizontalLeft = 0;
           int horizontalRight = 0;
           int verticalUp = 0;

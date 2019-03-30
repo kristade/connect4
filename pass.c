@@ -380,6 +380,14 @@ int main() {
         bool turn = true;
         bool firstMove = true;
         while(pvc){
+          if(gridFull(col, compacity)){
+            printf("\n");
+            printBoard(row, col, grid);
+            printf("It is a DRAW!!\n");
+            printf("The board is full. No more moves can be played.\n\n");
+            pvc = false;
+          }
+          if(pvc){
           if(turn){
             printf("\n");
             printBoard(row, col, grid);
@@ -416,7 +424,6 @@ int main() {
               pvc = false;
             }
             turn = false;
-
           }
           else if(!turn){
             printf("\n");
@@ -436,6 +443,7 @@ int main() {
             turn = true;
           }
         }
+      }
       }
       printf("Would you like to play again? (Y)es or (N)o: ");
       char nextMatch;

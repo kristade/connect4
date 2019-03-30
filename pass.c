@@ -86,26 +86,58 @@ void printBoard(int row, int col, char grid[row][col]){
   printf("\n\n");
 }
 
-void computerMove(struct Graph* graph) { // Artificial intelligence for the Player vs. Computer mode. Computer is always playing to win.
-    int numSquare;
-    for (numSquare = 1; numSquare < graph->numSquare; ++numSquare) {
-        struct square* pCrawl = graph->array[numSquare].head;
-        printf("\n Adjacency list of numSquarevertex %d\n head ", numSquare);
-        while (pCrawl)
-        {
-            printf("-> %d", pCrawl->location);
-            pCrawl = pCrawl->next;
-        }
-        printf("\n");
-    }
-}
-
 void playerMove1(int move, int space, int row, int col, char grid[row][col]){
   grid[space][move] = 'X';
 }
 
 void playerMove2(int move, int space, int row, int col, char grid[row][col]){
   grid[space][move] = 'O';
+}
+
+void computerMove(struct Graph* graph, bool firstMove, int row, int col, int compacity[col], char grid[row][col], int gridkey[row][col]) { // Artificial intelligence for the Player vs. Computer mode. Computer is always playing to win.
+  if(firstMove == true){
+    for(int a = row-1; a >= 0 && a < row; a--){
+      for(int b = col-1; b >= 0 && b < col; b--){
+        if(grid[a][b] == '_'){
+          grid[a][b] = 'O';
+          int move = b;
+          compacity[move] = compacity[move] - 1;
+          return;
+        }
+      }
+    }
+  }
+  int numSquare;
+    for (numSquare = 1; numSquare < graph->numSquare; ++numSquare) {
+        struct square* artInt = graph->array[numSquare].head;
+        for(int a = 0; a < row; a++){
+          for(int b = 0; b < col; b++){
+            for(int c = 0; c < row; c++){
+              for(int d = 0; d < col; d++){
+                if(artInt->location == gridkey[a][b]){
+                  if(grid[a][b] == 'O'){
+                    artInt = artInt->next;
+                      while(artInt){
+                        if(artInt->location == gridkey[c][d]){
+                          if(grid[c][d] == '_'){
+                            int move = d;
+                            if(compacity[move] == 0){artInt = artInt->next;}
+                            else{
+                              playerMove2(move, compacity[move]-1, row, col, grid);
+                              compacity[move] = compacity[move] - 1;
+                              return;
+                            }
+                          }
+                        }
+                        artInt = artInt->next;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
 }
 
 bool playerOne_winState(int row, int col, char grid[row][col]){
@@ -318,7 +350,73 @@ int main() {
         }
       }
       else{
-        computerMove(graph);
+        int compacity[col];
+
+        for(int a = 0; a < col; a++){
+          compacity[a] = row;
+          //printf("Index: %d\tAmount: %d\n", a, compacity[a]);
+        }
+
+        bool pvc = true;
+        bool turn = true;
+        bool firstMove = true;
+        while(pvc){
+          if(turn){
+            printf("\n");
+            printBoard(row, col, grid);
+            printf("It is Player One turn.\n");
+            printf("Choose a column to place your 'X': ");
+            char numMove[100];
+            scanf("%s", numMove);
+            int move = atoi(numMove);
+            while(move == 0 || move > col){
+                printf("\nSorry that is not an option.\n");
+                printf("Choose a column to place your 'X': ");
+                scanf("%s", numMove);
+                move = atoi(numMove);
+            }
+            while(move > 0 && move <= col){
+              if(compacity[move-1] == 0){
+                printf("\nSorry, that column is full.\n");
+                printf("Please choose another column: ");
+                scanf("%s", numMove);
+                move = atoi(numMove);
+              }
+              else{break;}
+            }
+            playerMove1(move-1, compacity[move-1]-1, row, col, grid);
+            compacity[move-1] = compacity[move - 1] - 1;
+            if(playerOne_winState(row, col, grid)){
+              printf("\n");
+              printBoard(row, col, grid);
+              printf("Player One is the WINNER!!\n");
+              match[0]++;
+              printf("Player One: %d win(s)\n", match[0]);
+              printf("Computer: %d win(s)\n\n", match[1]);
+              pvc = false;
+            }
+            turn = false;
+
+          }
+          else if(!turn){
+            printf("\n");
+            printBoard(row, col, grid);
+            printf("It is Computer turn.\n");
+            computerMove(graph, firstMove, row, col, compacity, grid, gridkey);
+            firstMove = false;
+            //printBoard(row, col, grid);
+            if(playerTwo_winState(row, col, grid)){
+              printf("\n");
+              printBoard(row, col, grid);
+              printf("Computer is the WINNER!!\n");
+              match[1]++;
+              printf("Player One: %d win(s)\n", match[0]);
+              printf("Computer: %d win(s)\n\n", match[1]);
+              pvc = false;
+            }
+            turn = true;
+          }
+        }
       }
       printf("Would you like to play again? (Y)es or (N)o: ");
       char nextMatch;

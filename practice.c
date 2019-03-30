@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <math.h>
+#include <ctype.h>
 
 struct square { // Square and/or node is the representation of where a location on the board is.
     int location; // Location of that square.
@@ -35,7 +36,7 @@ struct Graph* createGraph(int numSquare) { // Creating an adjacency list for the
 }
 
 void connect(struct Graph* graph, int begin, int location) { //Connects appriopriate squares with each other.
-    struct square* newNode = newsquare(location); // Connects a square with the beginning square, and if a square is already there, it justs adds it to the list.
+    struct square* newNode = newsquare(location); // Creates a new node for the list with index 'begin' and adds it to 'begin' adjacency list
     newNode->next = graph->array[begin].head;
     graph->array[begin].head = newNode;
 }
@@ -54,7 +55,34 @@ void makeConnection(struct Graph* graph, int row, int col, int gridkey[row][col]
   }
 }
 
-void printGraph(struct Graph* graph) { // Artificial intelligence for the Player vs. Computer mode. Computer is always playing to win.
+void makeBoard(int row, int col, int box, char grid[row][col], int gridkey[row][col]){ // Creating Connect4 board
+  for(int a = 0; a < row; a++){
+    for(int b = 0; b < col; b++){
+      box++;
+      grid[a][b] = '_'; // Initialize all boxes to '_'
+      gridkey[a][b] = box; // Keep counts of boxes
+    }
+  }
+}
+
+void printBoard(int row, int col, char grid[row][col]){
+  for(int a = 0; a < row; a++){
+    for(int b = 0; b < col; b++){
+      printf("%c  ", grid[a][b]);
+    }
+    printf("\n");
+  }
+
+  for(int a = 1; a <= col; a++){
+    if(a < 9)
+      printf("%d  ", a);
+    else
+      printf("%d ", a);
+  }
+  printf("\n");
+}
+
+void computerMove(struct Graph* graph) { // Artificial intelligence for the Player vs. Computer mode. Computer is always playing to win.
     int numSquare;
     for (numSquare = 1; numSquare < graph->numSquare; ++numSquare) {
         struct square* pCrawl = graph->array[numSquare].head;
@@ -68,9 +96,16 @@ void printGraph(struct Graph* graph) { // Artificial intelligence for the Player
     }
 }
 
+bool playerOne_winState(){}
+bool playerTwo_winStae(){}
+bool computer_winState(){}
+
 int main() {
     printf("** Welcome to Connect4 **\n"); // Introduction
     printf("I do not own the copyrights to this game.\n\n"); // Legal rights
+
+    printf("The object of this game is to connect 4 of your 'X's and/or 'O's so that they form a line in horizontal, vertical or diagonal direction\n")
+    printf("while ascending from the bottom of the board. First player to do so is the winner.\n\n")
 
     printf("Let's choose your Player mode.\n"); // Prompt player for Player mode
     printf("For Player vs. Player - Enter 'P'\n");
@@ -78,41 +113,67 @@ int main() {
     printf("Please enter player mode: ");
     char player;
     scanf("%c", &player);
-    while(player != 'p' && player != 'P' && player != 'c' && player != 'C'){
+
+    while(player != 'p' && player != 'P' && player != 'c' && player != 'C'){ //Loops until player enter the correct key.
       printf("\nSorry that is not an option.\n");
       printf("Please enter player mode: ");
       scanf(" %c", &player);
     }
+
     if(player == 'p' || player == 'P'){printf("\nYou have chosen Player vs. Player.\n");}
     else{printf("\nYou have chosen Player vs. Computer.\n");}
 
-    int row = 3;
-    int col = 3;
-    int box = 0;
-    char grid[row][col];
-    int gridkey[row][col];
-    for(int a = 0; a < row; a++){
-      for(int b = 0; b < col; b++){
-        box++;
-        grid[a][b] = '_';
-        gridkey[a][b] = box;
-      }
+    printf("Now let's choose your board size.\n"); // Prompt player for board size.
+    printf("**Warning any board over a 40 x 40, runs off the screen and becomes hard to play.**\n");
+    printf("**Warning any board below a 4 x 4 can not be played because no player will be able to connect four.**\n");
+
+    char numRow[100];
+    char numCol[100];
+
+    printf("\nPlease enter number of rows: ");
+    scanf("%s", numRow);
+    int row = atoi(numRow);
+
+    while(row < 4){
+      printf("\nSorry that is not an option.\n");
+      printf("Please enter number of rows: ");
+      scanf("%s", numRow);
+      row = atoi(numRow);
     }
-    for(int a = 0; a < row; a++){
-      for(int b = 0; b < col; b++){
-        printf("%c ", grid[a][b]);
-      }
-      printf("\n");
+
+    printf("\nPlease enter number of columns: ");
+    scanf("%s", numCol);
+    int col = atoi(numCol);
+
+    while(col < 4){
+      printf("\nSorry that is not an option.\n");
+      printf("Please enter number of columns: ");
+      scanf("%s", numCol);
+      col = atoi(numCol);
     }
-    for(int a = 0; a < row; a++){
-      for(int b = 0; b < col; b++){
-        printf("%d ", gridkey[a][b]);
+
+    bool playAgain = true; // Determines the amount of rounds the player plays
+    int matches = {0, 0}; // Keeps track of how many wins each player has
+
+    while(playAgain){
+      int box = 0;
+      char grid[row][col];
+      int gridkey[row][col];
+      makeBoard(row, col, box, grid, gridkey);
+      box = row * col;
+      struct Graph* graph = createGraph(box);
+      makeConnection(graph, row, col, gridkey);
+
+      if(player == 'p' || player == 'P'){
+        bool winner = false;
+        while(winner){
+          bool player1 = true;
+        }
       }
-      printf("\n");
-    }
-    struct Graph* graph = createGraph(box);
-    makeConnection(graph, row, col, gridkey);
-    printGraph(graph);
+      else{
+        computerMove(graph);
+      }
+
 
     return 0;
 }

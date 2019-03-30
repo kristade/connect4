@@ -75,6 +75,8 @@ void printBoard(int row, int col, char grid[row][col]){
     printf("\n");
   }
 
+  printf("\n");
+
   for(int a = 1; a <= col; a++){
     if(a < 9)
       printf("%d  ", a);
@@ -96,6 +98,16 @@ void computerMove(struct Graph* graph) { // Artificial intelligence for the Play
         }
         printf("\n");
     }
+}
+
+void playerMove1(int move, int space, int row, int col, char grid[row][col]){
+  printf("Move Error\n");
+  grid[space][move] = 'X';
+}
+
+void playerMove2(int move, int space, int row, int col, char grid[row][col]){
+  printf("Move Error\n");
+  grid[space][move] = 'O';
 }
 
 bool playerOne_winState(int row, int col, char grid[row][col]){
@@ -215,8 +227,9 @@ int main() {
       int box = 0;
       int compacity[col];
       for(int a = 0; a < col; a++){
-        compacity[a] = row;
+        compacity[a] = row-1;
       }
+
       char grid[row][col];
       int gridkey[row][col];
       makeBoard(row, col, box, grid, gridkey);
@@ -230,26 +243,58 @@ int main() {
         bool turn = true;
         while(pvp){
           if(turn){
+            printf("\n");
             printBoard(row, col, grid);
-            printf("It is player one turn.\n");
+            printf("It is Player One turn.\n");
             printf("Choose a column to place your 'X': ");
             char numMove[100];
             scanf("%s", numMove);
             int move = atoi(numMove);
             while(move == 0 || move > col){
-              if(compacity[move] == -1){
+                printf("\nSorry that is not an option.\n");
+                printf("Choose a column to place your 'X': ");
+                scanf("%s", numMove);
+                move = atoi(numMove);
+            }
+            while(move < 0 && move <= col){
+              if(compacity[move-1] == -1){
                 printf("\nSorry, that column is full.\n");
                 printf("Please choose another column: ");
                 scanf("%s", numMove);
                 move = atoi(numMove);
               }
-              else{
-                printf("\nSorry that is not an option.\n");
-                printf("Choose a column to place your 'X': ");
+              else{break;}
+            }
+            playerMove1(move-1, compacity[move-1], row, col, grid);
+            compacity[move-1] = compacity[move - 1] - 1;
+            turn = false;
+          }
+          else if(!turn){
+            printf("\n");
+            printBoard(row, col, grid);
+            printf("It is Player Two turn.\n");
+            printf("Choose a column to place your 'O': ");
+            char numMove[100];
+            scanf("%s", numMove);
+            int move = atoi(numMove);
+            while(move == 0 || move > col){
+              printf("\nSorry that is not an option.\n");
+              printf("Choose a column to place your 'X': ");
+              scanf("%s", numMove);
+              move = atoi(numMove);
+            }
+            while(move < 0 && move <= col){
+              if(compacity[move-1] == -1){
+                printf("\nSorry, that column is full.\n");
+                printf("Please choose another column: ");
                 scanf("%s", numMove);
                 move = atoi(numMove);
               }
+              else{break;}
             }
+            playerMove2(move-1, compacity[move-1], row, col, grid);
+            compacity[move-1] = compacity[move-1] - 1;
+            turn = true;
           }
         }
       }

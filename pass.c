@@ -108,7 +108,6 @@ void computerMove(struct Graph* graph, bool firstMove, int row, int col, int com
     }
   }
 
-
   int numSquare = 1;
   while(numSquare < graph->numSquare){
       for(int a = 0; a < row; a++){
@@ -123,7 +122,7 @@ void computerMove(struct Graph* graph, bool firstMove, int row, int col, int com
                     if(grid[c][d] == '_'){
                       int move = d;
                       if(compacity[move] == 0){artInt = artInt->next;}
-                      else{
+                      else {
                         playerMove2(move, compacity[move]-1, row, col, grid);
                         compacity[move] = compacity[move] - 1;
                         return;
@@ -150,20 +149,21 @@ bool playerOne_winState(int row, int col, char grid[row][col]){
           int vertical = 0;
           int diagLeft = 0;
           int diagRight = 0;
-          for(int c = 1; c < row; c++){
-            if(grid[a-c][b] == 'X'){horizontal++;}
+          for(int c = 0; c < 4; c++){
+            if(grid[a][b-c] == 'X'){horizontal++;}
+            if(horizontal == 4) return true;
           }
-          for(int c = 1; c < col; c++){
-            if(grid[a][b-c] == 'X'){vertical++;}
+          for(int c = 0; c < 4; c++){
+            if(grid[a-c][b] == 'X'){vertical++;}
+            if(vertical == 4) return true;
           }
-          for(int c = 1; c < col; c++){
-            if(grid[a-c][b+c] == 'X'){diagLeft++;}
+          for(int c = 0; c < 4; c++){
+            if(grid[a-c][b-c] == 'X'){diagLeft++;}
+            if(diagLeft == 4) return true;
           }
-          for(int c = 1; c < col; c++){
-            if(grid[a-c][b-c] == 'X'){diagRight++;}
-          }
-          if(horizontal == 4 || vertical == 4 || diagLeft == 4 || diagRight == 4){
-            return true;
+          for(int c = 0; c < 4; c++){
+            if(grid[a-c][b+c] == 'X'){diagRight++;}
+            if(diagRight == 4) return true;
           }
         }
       }
@@ -179,16 +179,16 @@ bool playerTwo_winState(int row, int col, char grid[row][col]){
           int vertical = 0;
           int diagLeft = 0;
           int diagRight = 0;
-          for(int c = 1; c < row; c++){
+          for(int c = 0; c < 4; c++){
             if(grid[a-c][b] == 'O'){horizontal++;}
           }
-          for(int c = 1; c < col; c++){
+          for(int c = 0; c < 4; c++){
             if(grid[a][b-c] == 'O'){vertical++;}
           }
-          for(int c = 1; c < col; c++){
+          for(int c = 0; c < 4; c++){
             if(grid[a-c][b+c] == 'O'){diagLeft++;}
           }
-          for(int c = 1; c < col; c++){
+          for(int c = 0; c < 4; c++){
             if(grid[a-c][b-c] == 'O'){diagRight++;}
           }
           if(horizontal == 4 || vertical == 4 || diagLeft == 4 || diagRight == 4){

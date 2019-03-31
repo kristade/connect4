@@ -1,2 +1,2 @@
 all:
-	gcc -Wall -std=c11 Connect4.c -o Connect4
+	gcc -Wall -std=c11 connect4.c -o connect4

@@ -109,36 +109,37 @@ void computerMove(struct Graph* graph, bool firstMove, int row, int col, int com
   }
 
   int numSquare = 1;
-  while(numSquare < graph->numSquare){
-      for(int a = 0; a < row; a++){
-        for(int b = 0; b < col; b++){
-          if(numSquare == gridkey[a][b]){
-            if(grid[a][b] == 'O'){
-              struct square* artInt = graph->array[numSquare].head;
-              while(artInt){
-              for(int c = 0; c < row; c++){
-                for(int d = 0; d < col; d++){
-                  if(artInt->location == gridkey[c][d]){
-                    if(grid[c][d] == '_'){
-                      int move = d;
-                      if(compacity[move] == 0){artInt = artInt->next;}
-                      else {
-                        playerMove2(move, compacity[move]-1, row, col, grid);
-                        compacity[move] = compacity[move] - 1;
-                        return;
+    while(numSquare < graph->numSquare){
+        for(int a = 0; a < row; a++){
+          for(int b = 0; b < col; b++){
+            if(numSquare == gridkey[a][b]){
+              if(grid[a][b] == 'O'){
+                struct square* artInt = graph->array[numSquare].head;
+                while(artInt){
+                for(int c = 0; c < row; c++){
+                  for(int d = 0; d < col; d++){
+                    if(artInt->location == gridkey[c][d]){
+                      if(grid[c][d] == '_'){
+                        int move = d;
+                        if(compacity[move] == 0){artInt = artInt->next;}
+                        else {
+                          playerMove2(move, compacity[move]-1, row, col, grid);
+                          compacity[move] = compacity[move] - 1;
+                          return;
+                        }
                       }
+                      else{artInt = artInt->next;}
                     }
-                    else{artInt = artInt->next;}
                   }
                 }
+                numSquare++;
               }
             }
-          }
-            else{numSquare++;}
+              else{numSquare++;}
+            }
           }
         }
       }
-    }
   }
 
 bool playerOne_winState(int row, int col, char grid[row][col]){

@@ -132,6 +132,7 @@ void computerMove(struct Graph* graph, bool firstMove, int row, int col, int com
                   }
                 }
               }
+              numSquare++;
             }
           }
             else{numSquare++;}

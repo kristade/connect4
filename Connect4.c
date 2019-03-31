@@ -142,8 +142,8 @@ void computerMove(struct Graph* graph, bool firstMove, int row, int col, int com
   }
 
 bool playerOne_winState(int row, int col, char grid[row][col]){
-    for(int a = 0; a < row; a++){
-      for(int b = 0; b < col; b++){
+    for(int a = row; a >= 0 && a < row; a--){
+      for(int b = col; b >= 0 && b < col; b--){
         if(grid[a][b] == 'X'){
           int horizontalLeft = 0;
           int horizontalRight = 0;
@@ -165,19 +165,19 @@ bool playerOne_winState(int row, int col, char grid[row][col]){
             if(horizontalRight == 4) return true;
           }
         }
-        if(abs(a-4) >= 0){
-        for(int c = 0; c < 4; c++){
-          if(grid[abs(a-c)][b] == 'X'){verticalUp++;}
+        if(abs(a-3) >= 0){
+        for(int c = 0; c < 3; c++){
+          if(grid[a-c][b] == 'X'){verticalUp++;}
           if(verticalUp == 4) return true;
         }
       }
-      if(a+4 <= row ){
-        for(int c = 0; c < 4; c++){
+      if(a+3 <= row ){
+        for(int c = 0; c < 3; c++){
           if(grid[a+c][b] == 'X'){verticalDown++;}
           if(verticalDown == 4) return true;
         }
       }
-      if(abs(a - 4) >= 0 && b + 4 <= col){
+      if(abs(a -3) >= 0 && b + 4 <= col){
         for(int c = 0; c < 4; c++){
           if(grid[abs(a-c)][b+c] == 'X'){diagLeftUp++;}
           if(diagLeftUp == 4) return true;
@@ -209,9 +209,9 @@ bool playerOne_winState(int row, int col, char grid[row][col]){
 }
 
 bool playerTwo_winState(int row, int col, char grid[row][col]){
-    for(int a = row; a >= 0; a--){
-      for(int b = col; b >= 0; b--){
-        if(grid[a][b] == 'O'){
+    for(int a = row; a < row; a++){
+      for(int b = 0; b < col; b++){
+        if(grid[a][b] == '0'){
           int horizontalLeft = 0;
           int horizontalRight = 0;
           int verticalUp = 0;
@@ -220,52 +220,52 @@ bool playerTwo_winState(int row, int col, char grid[row][col]){
           int diagLeftDown = 0;
           int diagRightUp = 0;
           int diagRightDown = 0;
-          if(b-3 >= 0){
+          if(abs(b-3) >= 0){
           for(int c = 0; c < 4; c++){
-            if(grid[a][b-c] == 'O'){horizontalLeft++;}
+            if(grid[a][abs(b-c)] == 'O'){horizontalLeft++;}
             if(horizontalLeft == 4) return true;
           }
         }
-        if(b+3 <= col ){
+        if(b+4 <= col ){
           for(int c = 0; c < 4; c++){
             if(grid[a][b+c] == 'O'){horizontalRight++;}
             if(horizontalRight == 4) return true;
           }
         }
-        if(a-3 >= 0){
+        if(abs(a-4) >= 0){
         for(int c = 0; c < 4; c++){
-          if(grid[a-c][b] == 'O'){verticalUp++;}
+          if(grid[abs(a-c)][b] == 'O'){verticalUp++;}
           if(verticalUp == 4) return true;
         }
       }
-      if(a+3 <= row ){
+      if(a+4 <= row ){
         for(int c = 0; c < 4; c++){
           if(grid[a+c][b] == 'O'){verticalDown++;}
           if(verticalDown == 4) return true;
         }
       }
-      if(a - 3 >= 0 && b + 3 <= col){
+      if(abs(a - 4) >= 0 && b + 4 <= col){
         for(int c = 0; c < 4; c++){
-          if(grid[a-c][b+c] == 'O'){diagLeftUp++;}
+          if(grid[abs(a-c)][b+c] == 'O'){diagLeftUp++;}
           if(diagLeftUp == 4) return true;
         }
         }
-        if(a + 3 <= row && b - 3 >= 0){
+        if(a + 4 <= row && abs(b - 4) >= 0){
           for(int c = 0; c < 4; c++){
-            if(grid[a+c][b-c] == 'O'){diagLeftDown++;}
+            if(grid[a+c][abs(b-c)] == 'O'){diagLeftDown++;}
             if(diagLeftDown == 4) return true;
           }
           }
 
-          if(a + 3 <= row && b + 3 <= col){
+          if(a + 4 <= row && b + 4 <= col){
             for(int c = 0; c < 4; c++){
               if(grid[a+c][b+c] == 'O'){diagRightUp++;}
               if(diagRightUp == 4) return true;
             }
             }
-          if(a - 3 >= 0 && b - 3 >= 0){
+          if(abs(a - 4) >= 0 && abs(b - 4) >= 0){
             for(int c = 0; c < 4; c++){
-              if(grid[a-c][b-c] == 'O'){diagRightDown++;}
+              if(grid[abs(a-c)][abs(b-c)] == 'O'){diagRightDown++;}
               if(diagRightDown == 4) return true;
             }
             }

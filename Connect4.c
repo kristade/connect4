@@ -142,137 +142,99 @@ void computerMove(struct Graph* graph, bool firstMove, int row, int col, int com
   }
 
 bool playerOne_winState(int row, int col, char grid[row][col]){
-    for(int a = row; a >= 0 && a < row; a--){
-      for(int b = col; b >= 0 && b < col; b--){
-        if(grid[a][b] == 'X'){
-          int horizontalLeft = 0;
-          int horizontalRight = 0;
-          int verticalUp = 0;
-          int verticalDown = 0;
-          int diagLeftUp = 0;
-          int diagLeftDown = 0;
-          int diagRightUp = 0;
-          int diagRightDown = 0;
-          if(abs(b-3) >= 0){
-          for(int c = 0; c < 4; c++){
-            if(grid[a][abs(b-c)] == 'X'){horizontalLeft++;}
-            if(horizontalLeft == 4) return true;
-          }
-        }
-        if(b+4 <= col ){
-          for(int c = 0; c < 4; c++){
-            if(grid[a][b+c] == 'X'){horizontalRight++;}
-            if(horizontalRight == 4) return true;
-          }
-        }
-        if(abs(a-3) >= 0){
-        for(int c = 0; c < 3; c++){
-          if(grid[a-c][b] == 'X'){verticalUp++;}
-          if(verticalUp == 4) return true;
-        }
-      }
-      if(a+3 <= row ){
-        for(int c = 0; c < 3; c++){
-          if(grid[a+c][b] == 'X'){verticalDown++;}
-          if(verticalDown == 4) return true;
-        }
-      }
-      if(abs(a -3) >= 0 && b + 4 <= col){
+  for(int a = 0; a < row; a++){
+      for(int b = 0; b < col - 3; b++){
+        int horizon = 0;
         for(int c = 0; c < 4; c++){
-          if(grid[abs(a-c)][b+c] == 'X'){diagLeftUp++;}
-          if(diagLeftUp == 4) return true;
-        }
-        }
-        if(a + 4 <= row && abs(b - 4) >= 0){
-          for(int c = 0; c < 4; c++){
-            if(grid[a+c][abs(b-c)] == 'X'){diagLeftDown++;}
-            if(diagLeftDown == 4) return true;
+          if(grid[a][b+c] == 'X'){
+            horizon++;
           }
-          }
-
-          if(a + 4 <= row && b + 4 <= col){
-            for(int c = 0; c < 4; c++){
-              if(grid[a+c][b+c] == 'X'){diagRightUp++;}
-              if(diagRightUp == 4) return true;
-            }
-            }
-          if(abs(a - 4) >= 0 && abs(b - 4) >= 0){
-            for(int c = 0; c < 4; c++){
-              if(grid[abs(a-c)][abs(b-c)] == 'X'){diagRightDown++;}
-              if(diagRightDown == 4) return true;
-            }
-            }
-      }
+          if(horizon == 4){return true;}
         }
       }
+    }
+    for(int a = 0; a < col; a++){
+      for(int b = 0; b < row - 3; b++){
+        int vertical = 0;
+        for(int c = 0; c < 4; c++){
+          if(grid[b+c][a] == 'X'){
+            vertical++;
+          }
+          if(vertical == 4){return true;}
+        }
+      }
+    }
+    for(int a = 0; a < row - 3; a++){
+      for(int b = 0; b < col - 3; b++){
+        int diagRight = 0;
+        for(int c = 0; c < 4; c++){
+          if(grid[a+c][b+c] == 'X'){
+            diagRight++;
+          }
+          if(diagRight == 4){return true;}
+        }
+      }
+    }
+    for(int a = row - 1; a > 2; a--){
+      for(int b = 0; b < col - 3; b++){
+        int diagLeft = 0;
+        for(int c = 0; c < 4; c++){
+          if(grid[a-c][b+c] == 'X'){
+            diagLeft++;
+          }
+          if(diagLeft == 4){return true;}
+        }
+      }
+    }
     return false;
 }
 
 bool playerTwo_winState(int row, int col, char grid[row][col]){
-    for(int a = row; a < row; a++){
-      for(int b = 0; b < col; b++){
-        if(grid[a][b] == '0'){
-          int horizontalLeft = 0;
-          int horizontalRight = 0;
-          int verticalUp = 0;
-          int verticalDown = 0;
-          int diagLeftUp = 0;
-          int diagLeftDown = 0;
-          int diagRightUp = 0;
-          int diagRightDown = 0;
-          if(abs(b-3) >= 0){
-          for(int c = 0; c < 4; c++){
-            if(grid[a][abs(b-c)] == 'O'){horizontalLeft++;}
-            if(horizontalLeft == 4) return true;
-          }
-        }
-        if(b+4 <= col ){
-          for(int c = 0; c < 4; c++){
-            if(grid[a][b+c] == 'O'){horizontalRight++;}
-            if(horizontalRight == 4) return true;
-          }
-        }
-        if(abs(a-4) >= 0){
-        for(int c = 0; c < 4; c++){
-          if(grid[abs(a-c)][b] == 'O'){verticalUp++;}
-          if(verticalUp == 4) return true;
-        }
+  for(int a = 0; a < row; a++){
+  for(int b = 0; b < col - 3; b++){
+    int horizon = 0;
+    for(int c = 0; c < 4; c++){
+      if(grid[a][b+c] == 'O'){
+        horizon++;
       }
-      if(a+4 <= row ){
-        for(int c = 0; c < 4; c++){
-          if(grid[a+c][b] == 'O'){verticalDown++;}
-          if(verticalDown == 4) return true;
-        }
+      if(horizon == 4){return true;}
+    }
+  }
+}
+for(int a = 0; a < col; a++){
+  for(int b = 0; b < row - 3; b++){
+    int vertical = 0;
+    for(int c = 0; c < 4; c++){
+      if(grid[b+c][a] == 'O'){
+        vertical++;
       }
-      if(abs(a - 4) >= 0 && b + 4 <= col){
-        for(int c = 0; c < 4; c++){
-          if(grid[abs(a-c)][b+c] == 'O'){diagLeftUp++;}
-          if(diagLeftUp == 4) return true;
-        }
-        }
-        if(a + 4 <= row && abs(b - 4) >= 0){
-          for(int c = 0; c < 4; c++){
-            if(grid[a+c][abs(b-c)] == 'O'){diagLeftDown++;}
-            if(diagLeftDown == 4) return true;
-          }
-          }
-
-          if(a + 4 <= row && b + 4 <= col){
-            for(int c = 0; c < 4; c++){
-              if(grid[a+c][b+c] == 'O'){diagRightUp++;}
-              if(diagRightUp == 4) return true;
-            }
-            }
-          if(abs(a - 4) >= 0 && abs(b - 4) >= 0){
-            for(int c = 0; c < 4; c++){
-              if(grid[abs(a-c)][abs(b-c)] == 'O'){diagRightDown++;}
-              if(diagRightDown == 4) return true;
-            }
-            }
+      if(vertical == 4){return true;}
+    }
+  }
+}
+for(int a = 0; a < row - 3; a++){
+  for(int b = 0; b < col - 3; b++){
+    int diagRight = 0;
+    for(int c = 0; c < 4; c++){
+      if(grid[a+c][b+c] == 'O'){
+        diagRight++;
       }
-        }
+      if(diagRight == 4){return true;}
+    }
+  }
+}
+for(int a = row - 1; a > 2; a--){
+  for(int b = 0; b < col - 3; b++){
+    int diagLeft = 0;
+    for(int c = 0; c < 4; c++){
+      if(grid[a-c][b+c] == 'O'){
+        diagLeft++;
       }
-    return false;
+      if(diagLeft == 4){return true;}
+    }
+  }
+}
+return false;
 }
 
 

@@ -59,3 +59,7 @@ If computer beats Player One.<br/>
 If Player One beats the computer.<br/>
 ![](images/playerbeatscomputer.PNG)
 <br/><br/>
+What if Player One and the computer are both great players, and can not seem to beat each other? If the players fill the board before either one of them can connect four in a row, the game will end in a draw, and will ask the players if they would like to play another match.<br/><br/>
+If the game ends in a draw.<br/>
+![](images/draw.PNG)
+<br/><br/>

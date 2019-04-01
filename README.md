@@ -52,3 +52,10 @@ In the example Player One and Player Two have played three matches, and Player O
 Say you are in Player vs Computer mode, Player One will still have the same options as in Player vs Player mode, but this time player against a computer programmed to win. Each time after Player One plays, the computer will automatically play it's next best move, as seen below.<br/>
 ![](images/computerturn.PNG)
 <br/><br/>
+When the computer connects four of it's ascii characters in a row, it will then end the game and add one to the computer's record. It will do the same for Player one, if they beat the computer. And after each match, PLayer One will be asked if they want to play again, same as in Player v Player mode.<br/><br/>
+If computer beats Player One.<br/>
+![](images/computerwin.PNG)
+<br/><br/>
+If Player One beats the computer.<br/>
+![](images/playerbeatscomputer.PNG)
+<br/><br/>

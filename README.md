@@ -10,6 +10,6 @@ Assuming you are in my github, if not https://github.com/kristade/connect4 , you
 ![](images/clone.PNG)
 <br/><br/>
 You will then download the github as a zipfile, and place it into your compiler file to be compiled.<br/>
-Once you are inside your compiler terminal and have the game files ready, you can type "make" in order to compile the code for the game.<br/>
+Once you are inside your compiler terminal and have the game files ready, you can type "make" in order to compile the code for the game.
 For example:<br/>
 ![](images/makefile.PNG)

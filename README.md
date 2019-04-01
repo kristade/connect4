@@ -17,9 +17,11 @@ For example:<br/>
 Once the code compiles, you will then type "./connect4" to actually run the game.<br/>
 ![](images/rungame.PNG)
 <br/><br/>
-You are now playing connect4 ascii style. It will give you the basic instructions of the game, and then prompt the user for a "Player mode". The user has the option of "Player vs Player" and "Player vs Computer". You can type 'p' or 'P' for Player vs Player option and 'c' or 'C' for Player vs Computer option. Player one will always go first for either option.<br/>
+You are now playing connect4 ascii style. It will give you the basic instructions of the game, and then prompt the user for a "Player mode". The user has the option of "Player vs Player" and "Player vs Computer". You can type 'p' or 'P' for Player vs Player option and 'c' or 'C' for Player vs Computer option. Player one will always go first for either option. If the user does not select one of the 'p' or 'c' as an option, they will be asked to re-enter until it is correct.<br/><br/>
 Example of Player vs Player.<br/>
 ![](images/playervsplayer.PNG)
 <br/><br/>
 Example of Player vs Computer.<br/>
 ![](images/playervscomputer.PNG)
+<br/><br/>
+After selecting the Player Mode, the user will be prompted to choose a board size. It will advise that a board under a 4x4 or over 40x40 will be difficult to play. It will first ask the user to enter a number for rows, and then another number for columns.

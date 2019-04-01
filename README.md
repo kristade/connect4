@@ -63,3 +63,6 @@ What if Player One and the computer are both great players, and can not seem to 
 If the game ends in a draw.<br/>
 ![](images/draw.PNG)
 <br/><br/>
+Lastly, if the players no longer wants to play with other, when asked if they would like to play another game they have the option to choose no. After the player chooses no, the game will say "Thanks for playing Connect4. Come again soon." Then the entire game will exit out.<br/><br/>
+If the players are finished playing each other, they can exit the game.<br/>
+![](images/comeagain.PNG)

@@ -13,3 +13,6 @@ You will then download the github as a zipfile, and place it into your compiler 
 Once you are inside your compiler terminal and have the game files ready, you can type "make" in order to compile the code for the game.
 For example:<br/>
 ![](images/makefile.PNG)
+<br/><br/>
+Once the code compiles, you will then type "./connect4" to actually run the game.<br/>
+![](images/run game.PNG)

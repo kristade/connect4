@@ -8,3 +8,8 @@ Now let's begin.<br/>
 Assuming you are in my github, if not https://github.com/kristade/connect4 , you will need to click the "Clone or download" as seen below.
 <br/>
 ![](images/clone.PNG)
+<br/><br/>
+You will then download the github as a zipfile, and place it into your compiler file to be compiled.<br/>
+Once you are inside your compiler terminal and have the game files ready, you can type "make" in order to compile the code for the game.<br/>
+For example:<br/>
+![](images/makefile.PNG)

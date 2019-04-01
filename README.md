@@ -20,3 +20,6 @@ Once the code compiles, you will then type "./connect4" to actually run the game
 You are now playing connect4 ascii style. It will give you the basic instructions of the game, and then prompt the user for a "Player mode". The user has the option of "Player vs Player" and "Player vs Computer". You can type 'p' or 'P' for Player vs Player option and 'c' or 'C' for Player vs Computer option. Player one will always go first for either option.<br/>
 Example of Player vs Player.<br/>
 ![](images/playervsplayer.PNG)
+<br/><br/>
+Example of Player vs Computer.<br/>
+![](images/playervscomputer.PNG)

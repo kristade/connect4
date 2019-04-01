@@ -39,9 +39,13 @@ There are three ways to connect4.<br/><br/>
 Horizontally.<br/>
 ![](images/horizontal.PNG)
 <br/><br/>
-Verticaly.<br/>
+Vertically.<br/>
 ![](images/vertical.PNG)
 <br/><br/>
 Diagonally.<br/>
 ![](images/diagonal.PNG)
+<br/><br/>
+The players can play multiple matches with the same board size. Each time a player wins, they get one point added to their overall record. And after each game they will be asked if they want to play another match. If yes, they will start with another empty board, but their record will not reset, being able to keep score.<br/><br/>
+In the example Player One and Player Two have played three matches, and Player One has won two of those matches, while Player Two has only won one.<br/>
+![](images/matches.PNG)
 <br/><br/>

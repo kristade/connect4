@@ -24,9 +24,13 @@ Example of Player vs Player.<br/>
 Example of Player vs Computer.<br/>
 ![](images/playervscomputer.PNG)
 <br/><br/>
-After selecting the Player Mode, the user will be prompted to choose a board size. It will advise that a board under a 4x4 or over 40x40 will be difficult to play. It will first ask the user to enter a number for rows, and then another number for columns. If the user does not enter a valid number, they will be asked to re-enter until they enter a valid number. It will then print an empty board with the corresponding column number under each column.<br/><br/>
+After selecting the Player Mode, Player vs Player in the example bleow, the user will be prompted to choose a board size. It will advise that a board under a 4x4 or over 40x40 will be difficult to play. It will first ask the user to enter a number for rows, and then another number for columns. If the user does not enter a valid number, they will be asked to re-enter until they enter a valid number. It will then print an empty board with the corresponding column number under each column.<br/><br/>
 If the user enters a 4x4
 ![](images/boardsize.PNG)
 <br/><br/>
 Player One always goes first, and Player One is always 'X'. The user will be prompted to choose a column to drop their ascii into. In the exmaple below, Player One chose column 1 to place their 'X.<br/>
 ![](images/column.PNG)
+<br/><br/>
+If the Player mode is on Player vs Player, the game will then prompt Player Two do the same as Player One did, and select a column. If they enter an invalid key or a number not in the range of columns, they will be asked to re-enter until it s correct.<br/><br/>
+Player Two choosing a column.<br/>
+![](images/player2.PNG)

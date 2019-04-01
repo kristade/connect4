@@ -24,5 +24,6 @@ Example of Player vs Player.<br/>
 Example of Player vs Computer.<br/>
 ![](images/playervscomputer.PNG)
 <br/><br/>
-After selecting the Player Mode, the user will be prompted to choose a board size. It will advise that a board under a 4x4 or over 40x40 will be difficult to play. It will first ask the user to enter a number for rows, and then another number for columns. If the user does not enter a valid number, they will be asked to re-enter until they enter a valid number.<br/><br/>
+After selecting the Player Mode, the user will be prompted to choose a board size. It will advise that a board under a 4x4 or over 40x40 will be difficult to play. It will first ask the user to enter a number for rows, and then another number for columns. If the user does not enter a valid number, they will be asked to re-enter until they enter a valid number. It will then print an empty board with the corresponding column number under each column.<br/><br/>
+If the user enters a 4x4
 ![](images/boardsize.PNG)

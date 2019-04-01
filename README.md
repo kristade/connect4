@@ -49,3 +49,6 @@ The players can play multiple matches with the same board size. Each time a play
 In the example Player One and Player Two have played three matches, and Player One has won two of those matches, while Player Two has only won one.<br/>
 ![](images/matches.PNG)
 <br/><br/>
+Say you are in Player vs Computer mode, Player One will still have the same options as in Player vs Player mode, but this time player against a computer programmed to win. Each time after Player One plays, the computer will automatically play it's next best move, as seen below.<br/>
+![](images/computerturn.PNG)
+<br/><br/>

@@ -34,3 +34,14 @@ Player One always goes first, and Player One is always 'X'. The user will be pro
 If the Player mode is on Player vs Player, the game will then prompt Player Two do the same as Player One did, and select a column. If they enter an invalid key or a number not in the range of columns, they will be asked to re-enter until it s correct.<br/><br/>
 Player Two choosing a column.<br/>
 ![](images/player2.PNG)
+<br/><br/>
+There are three ways to connect4.<br/><br/>
+Horizontally.<br/>
+![](images/horizontal.PNG)
+<br/><br/>
+Verticaly.<br/>
+![](images/vertical.PNG)
+<br/><br/>
+Diagonally.<br/>
+![](images/diagonal.PNG)
+<br/><br/>

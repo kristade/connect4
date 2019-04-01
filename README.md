@@ -15,6 +15,4 @@ For example:<br/>
 ![](images/makefile.PNG)
 <br/><br/>
 Once the code compiles, you will then type "./connect4" to actually run the game.<br/>
-![](
-        connect4/images/run game.PNG
-      )
+![](images/run game.PNG)

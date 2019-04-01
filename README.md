@@ -5,5 +5,6 @@ Below I have provided a link to demonstrate how the game is operated.<br/>
 Video: https://youtu.be/GPlYYzY8Uns
 <br/><br/>
 Now let's begin.<br/>
-Assuming you are in my github, if not https://github.com/kristade/connect4 , you will need to click the "Clone or download"
+Assuming you are in my github, if not https://github.com/kristade/connect4 , you will need to click the "Clone or download" as seen below.
+<br/>
 ![](images/clone.PNG)
